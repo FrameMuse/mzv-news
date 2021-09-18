@@ -1,10 +1,17 @@
 import "app/assets/scss/main.scss"
 import Article from "app/components/Article/Article"
 import CaptureGroup from "app/components/CaptureGroup/CaptureGroup"
-import DataJSON from "data/data.json"
 import Appointment from "app/views/Appointment"
+import { useState, useEffect } from "react"
+import { ArticleProps } from "./components/Article/Article"
 
 function App() {
+	const [DataJSON, setDataJSON] = useState<ArticleProps[] | null>(null)
+	useEffect(() => {
+		fetch("https://us-central1-mzv-news.cloudfunctions.net/function-2")
+		.then(data => data.json())
+		.then(data => setDataJSON(data))
+	}, [])
   return (
     <div className="news-list">
       <div className="news-list-header">
@@ -21,7 +28,7 @@ function App() {
             <ArticleTag color="red">Запись на регистрацию</ArticleTag>
           </div>
         </div> */}
-        {DataJSON.map((article, key) => (
+        {DataJSON?.map((article, key) => (
           <Article {...article} key={key} />
         ))}
       </CaptureGroup>
