@@ -26,9 +26,9 @@ export default function Appointment(props: { data: ArticleProps[] }) {
       {date && (
         <div className="appointment__container">
           {(date.getTime() < Date.now()) ? (
-            <AppointmentBlock title="Текущая дата" date={date} />
-          ) : (
             <AppointmentBlock title="Последняя дата" date={date} />
+          ) : (
+            <AppointmentBlock title="Текущая дата" date={date} />
           )}
         </div>
       )}
