@@ -23,7 +23,7 @@ export default function Article(props: ArticleProps) {
         ))} */}
       </small>
       <p className="news-article__text">{props.text}</p>
-      <a href={props.link} className="news-article__more">Подробнее...</a>
+      <a href={"https://mzv.cz" + props.link} target="_blank" rel="noopener noreferrer" className="news-article__more">Подробнее...</a>
     </div>
   )
 }

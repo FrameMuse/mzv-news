@@ -1,13 +1,14 @@
+import "app/assets/scss/appointment.scss"
 import { classWithModifiers } from "kotto-web-common"
 
 export default function Appointment() {
   return (
     <div className="appointment">
-      <div className="appointment__title">Appointment</div>
-      <div className="appointment__desc">Appointment Desc</div>
+      <h2 className="appointment__title">Запись на регистрацию</h2>
+      <p className="appointment__desc">Здесь будут даты записи. "Дальнейшии рекомендации будут тут, описание как правильно подавать визу и время..."</p>
       <div className="appointment__container">
-        <AppointmentBlock title="Последняя дата" date={new Date()} />
         <AppointmentBlock title="Текущая дата" />
+        <AppointmentBlock title="Последняя дата" date={new Date()} />
       </div>
     </div>
   )
@@ -21,7 +22,7 @@ function AppointmentBlock(props: AppointmentBlockProps) {
   return (
     <div className="appointment-block">
       <div className="appointment-block__title">{props.title}:</div>
-      <div className={classWithModifiers("appointment-block__date", !!props.date && "no-date")}>{props.date?.toDateString() || "Не известно"}</div>
+      <div className={classWithModifiers("appointment-block__date", !props.date && "no-date")}>{props.date?.toLocaleString() || "Не известно"}</div>
     </div>
   )
 }

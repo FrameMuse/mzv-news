@@ -17,16 +17,22 @@ body {
 }
 
 .news-list-header {
-  display: flex;
-  align-items: baseline;
-  border-bottom: 1px solid #eaeaee;
-  margin-bottom: 5em;
+  display: grid;
+  justify-items: center;
+  // border-bottom: 1px solid #eaeaee;
+}
+
+.news-list-header__image {
+  $size: 10em;
+  width: $size;
+  height: $size;
+  object-fit: contain;
 }
 
 .news-list-header__title {}
 
 .news-list-header__desc {
-  margin-left: 0.5em;
+  // margin-left: 0.5em;
 }
 
 /* Tags */
@@ -39,7 +45,9 @@ body {
 
 /* Capture Group */
 
-.news-list-capture {}
+.news-list-capture {
+  @include PageBox;
+}
 
 .news-list-capture__title {
   color: #666;
@@ -55,7 +63,10 @@ body {
 .news-article {
   display: grid;
   padding-bottom: 2.5em;
-  // row-gap: 2.5em;
+
+  &:hover {
+    background: #f4f4f8;
+  }
 
   &:not(:last-child) {
     border-bottom: 1px solid #eaeaee;
@@ -63,6 +74,7 @@ body {
 }
 
 .news-article__title {
+  margin-top: unset;
   line-height: 1.25;
 }
 
@@ -88,7 +100,7 @@ body {
   }
 
   &--red {
-    background: var(--color-red);
+    background: $color-red;
   }
 
   &--green {
