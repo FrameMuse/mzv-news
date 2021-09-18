@@ -27,6 +27,9 @@ body {
   width: $size;
   height: $size;
   object-fit: contain;
+
+  box-shadow: 0 0 15px #bdbdbd;
+  border-radius: 100%;
 }
 
 .news-list-header__title {}
@@ -61,14 +64,19 @@ body {
 /* Article */
 
 .news-article {
+  position: relative;
   display: grid;
-  padding-bottom: 2.5em;
+  margin-bottom: 2.5em;
 
   &:hover {
     background: #f4f4f8;
   }
 
-  &:not(:last-child) {
+  &:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    bottom: -2.5em;
+    width: 100%;
     border-bottom: 1px solid #eaeaee;
   }
 }
