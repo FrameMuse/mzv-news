@@ -5,8 +5,8 @@ import { classWithModifiers } from "kotto-web-common"
 export interface ArticleProps {
   title: string
   text: string
-  created_at: string
-  updated_at: string
+  created_at: number
+  updated_at: number
   tags: string[]
   link: string
 }
@@ -16,7 +16,7 @@ export default function Article(props: ArticleProps) {
       <h3 className="news-article__title">{props.title}</h3>
       <small className="news-article__details">
         <span>
-          Создано: {props.created_at} \ Обновлено: {props.updated_at} \ Тэги:
+          Создано: {props.created_at.toLocaleString()} \ Обновлено: {props.updated_at.toLocaleString()}
         </span>
         {/* {props.tags.map((tag, key) => (
           <ArticleTag color="red" key={key}>{tag}</ArticleTag>
