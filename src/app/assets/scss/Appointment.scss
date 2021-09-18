@@ -1,0 +1,31 @@
+@import "shared";
+
+.appointment {}
+
+.appointment__title {}
+
+.appointment__desc {}
+
+.appointment__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Appointment Block */
+
+.appointment-block {
+  display: grid;
+  row-gap: 1em;
+}
+
+.appointment-block__title {}
+
+.appointment-block__date {
+  padding: 1em;
+  background: #eaeaee;
+
+  &--no-date {
+    background: $color-green;
+  }
+}
