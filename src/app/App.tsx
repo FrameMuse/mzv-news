@@ -6,12 +6,13 @@ import { useState, useEffect } from "react"
 import { ArticleProps } from "./components/Article/Article"
 
 function App() {
-	const [DataJSON, setDataJSON] = useState<ArticleProps[] | null>(null)
-	useEffect(() => {
-		fetch("https://us-central1-mzv-news.cloudfunctions.net/function-2")
-		.then(data => data.json())
-		.then(data => setDataJSON(data))
-	}, [])
+  const [DataJSON, setDataJSON] = useState<ArticleProps[] | null>(null)
+  useEffect(() => {
+    fetch("https://us-central1-mzv-news.cloudfunctions.net/function-2")
+      .then(data => data.json())
+      .then(data => setDataJSON(data))
+  }, [])
+  if (DataJSON == null) return <>Загрузка...</>
   return (
     <div className="news-list">
       <div className="news-list-header">
@@ -20,7 +21,7 @@ function App() {
         <p className="news-list-header__desc">Последнии обновления (Beta) | Задержка ~3 минуты</p>
         {/* <p className="news-list-header__desc"></p> */}
       </div>
-      <Appointment />
+      <Appointment data={DataJSON} />
       <CaptureGroup title="Виза">
         {/* <div className="news-list-tags">
           <h3 className="news-list-tags__title">Tag filter</h3>
@@ -28,7 +29,7 @@ function App() {
             <ArticleTag color="red">Запись на регистрацию</ArticleTag>
           </div>
         </div> */}
-        {DataJSON?.map((article, key) => (
+        {DataJSON.map((article, key) => (
           <Article {...article} key={key} />
         ))}
       </CaptureGroup>
