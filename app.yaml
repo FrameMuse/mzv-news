@@ -11,6 +11,10 @@ resources:
   disk_size_gb: 10
 
 handlers:
+  # Serve articles data parser
+  - url: /data
+    redirect_http_response_code: 301
+    script: src/data/script.js
   # Serve all static files with url ending with a file extension
   - url: /(.*\..+)$
     static_files: build/\1
@@ -19,7 +23,3 @@ handlers:
   - url: /.*
     static_files: build/index.html
     upload: build/index.html
-  # Serve articles data parser
-  - url: /data
-    secure: always
-    script: src/data/script.php
