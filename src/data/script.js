@@ -2,7 +2,6 @@ const fs = require("fs")
 
 const __DIR__ = process.env.PWD + "/src/data"
 const threshold = 1 * 60 * 1000
-const lastUpdateTime = Number(fs.readFileSync(__DIR__ + "/lastUpdateTime.txt"))
 
 async function handleData() {
   const axios = require("axios")
@@ -16,20 +15,17 @@ async function handleData() {
   return dataResponseString
 }
 
-if ((Date.now() - lastUpdateTime) > threshold) {
-  handleData().then(data => {
-    process.stdout.write(data)
-  })
-} else {
-  const data = fs.readFileSync(__DIR__ + "/data.json").toString()
-  process.stdout.write(data)
-}
+const http = require('http')
 
-// (req, res) => {
-//   const max = req.query.max || req.body.max || 3
-//   cacheEffect(async () => {
-//     const response = await axios.get("https://www.mzv.cz/moscow/ru/vizy_i_konsulskaja/novosti")
-//     const articleParser = new ArticleParser(response.data)
-//     return articleParser.articles.sort((a, b) => a.updated_at >= b.updated_at ? -1 : 1).slice(0, max)
-//   }).then(res.status(200).send)
-// }
+const server = http.createServer((req, res) => {
+  const lastUpdateTime = Number(fs.readFileSync(__DIR__ + "/lastUpdateTime.txt"))
+  if ((Date.now() - lastUpdateTime) > threshold) {
+    handleData().then(data => {
+      res.writeHead(200).end(data)
+    })
+  } else {
+    const data = fs.readFileSync(__DIR__ + "/data.json").toString()
+    res.writeHead(200).end(data)
+  }
+})
+server.listen(80)
