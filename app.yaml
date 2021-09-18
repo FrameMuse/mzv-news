@@ -1,0 +1,25 @@
+runtime: nodejs14 # or another supported version
+# env: flex
+default_expiration: "1m"
+automatic_scaling:
+  max_instances: 1
+# manual_scaling:
+#   instances: 1
+resources:
+  cpu: 1
+  memory_gb: 0.9
+  disk_size_gb: 10
+
+handlers:
+  # Serve all static files with url ending with a file extension
+  - url: /(.*\..+)$
+    static_files: build/\1
+    upload: build/(.*\..+)$
+  # Catch all handler to index.html
+  - url: /.*
+    static_files: build/index.html
+    upload: build/index.html
+  # Serve articles data parser
+  - url: /data
+    secure: always
+    script: src/data/script.php
