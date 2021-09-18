@@ -1,23 +1,28 @@
 const fs = require("fs")
 
+const __DIR__ = process.env.PWD + "/src/data"
 const threshold = 1 * 60 * 1000
-const lastUpdateTime = Number(fs.readFileSync("lastUpdateTime.txt"))
+const lastUpdateTime = Number(fs.readFileSync(__DIR__ + "/lastUpdateTime.txt"))
 
 async function handleData() {
   const axios = require("axios")
   const dataRequest = axios.get("https://us-central1-mzv-news.cloudfunctions.net/function-2?max=2")
   const dataResponse = await dataRequest
+  const dataResponseString = JSON.stringify(dataResponse.data)
 
-  fs.writeFileSync("data.json", dataResponse)
-  fs.writeFileSync("lastUpdateTime.txt", Date.now())
+  fs.writeFileSync(__DIR__ + "/data.json", dataResponseString)
+  fs.writeFileSync(__DIR__ + "/lastUpdateTime.txt", String(Date.now()))
 
-  return dataResponse
+  return dataResponseString
 }
 
 if ((Date.now() - lastUpdateTime) > threshold) {
-  handleData().then(console.log)
+  handleData().then(data => {
+    process.stdout.write(data)
+  })
 } else {
-  console.log(fs.readFileSync("data.json"))
+  const data = fs.readFileSync(__DIR__ + "/data.json").toString()
+  process.stdout.write(data)
 }
 
 // (req, res) => {
