@@ -12,7 +12,7 @@ $color-blue: hsl(200, $color-base-saturation, $color-base-lightness);
   transition: 200ms box-shadow;
 
   &:hover {
-    box-shadow: inset 0 0 10px -4px #eaeaee;
+    box-shadow: 0 0 20px -4px #eeeef2;
   }
 
   &:not(:first-child) {
