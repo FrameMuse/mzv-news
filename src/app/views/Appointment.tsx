@@ -22,7 +22,7 @@ export default function Appointment(props: { data: ArticleProps[] }) {
   return (
     <div className="appointment">
       <h2 className="appointment__title">Запись на регистрацию</h2>
-      <p className="appointment__desc">Здесь будут даты записи. "Дальнейшии рекомендации будут тут, описание как правильно подавать визу и время..."</p>
+      {/* <p className="appointment__desc">Здесь будут даты записи. "Дальнейшии рекомендации будут тут, описание как правильно подавать визу и время..."</p> */}
       {date && (
         <div className="appointment__container">
           {(date.getTime() < Date.now()) ? (
